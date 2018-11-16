@@ -11,17 +11,31 @@ namespace Online_Shopping
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class tblProduct
     {
+        [Display(Name = "Product ID")]
         public int ProductID { get; set; }
+
+        [Display(Name = "Product Name")]
         public string ProductName { get; set; }
+
         public string Description { get; set; }
+
+        [Display(Name = "Unit Price")]
         public int UnitPrice { get; set; }
+
         public string Unit { get; set; }
+
         public string Category { get; set; }
+
         public bool isActive { get; set; }
+
+        [Display(Name = "Created Date")]
         public Nullable<System.DateTime> CreatedDate { get; set; }
+
+        [Display(Name = "Modified Date")]
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
 }

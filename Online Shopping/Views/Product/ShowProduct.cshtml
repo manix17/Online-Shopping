@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Online_Shopping.tblProduct>
+
+@{if (TempData["regStatus"] == null)
+    {
+        ViewBag.Title = "Our Products List";
+    }
+
+    else
+    {
+        ViewBag.Title = "Registration Successfull - Our Products List";
+        ViewBag.regSuccess = "Registration Successfull";
+    }
+}
+@{if (TempData["editStatus"] == null)
+    {
+
+    }
+
+    else
+    {
+        ViewBag.Title = "Successfully Edited - Our Products List";
+        ViewBag.editSuccess = "Your Edit Was Successfull";
+    }
+}
+
+@{if (TempData["delStatus"] == null)
+    {
+
+    }
+
+    else
+    {
+        ViewBag.Title = "Successfully Deleted - Our Products List";
+        ViewBag.delSuccess = "Successfully Deleted";
+    }
+}
+
+<h1>@ViewBag.regSuccess</h1>
+<h1>@ViewBag.editSuccess</h1>
+<h1>@ViewBag.delSuccess</h1>
+
+<h2>ShowProduct</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateProduct")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "VirtualDelete", new { id = item.ProductID })
+            </td>
+        </tr>
+    }
+
+</table>

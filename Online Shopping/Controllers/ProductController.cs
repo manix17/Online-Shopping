@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Online_Shopping.Models;
 
 namespace Online_Shopping.Controllers
 {
     public class ProductController : Controller
     {
-        {
-        // GET: Product
+       
         [HttpGet]
         public ActionResult CreateProduct()
         {
@@ -42,7 +42,7 @@ namespace Online_Shopping.Controllers
 
 
             }
-            TempData["regStatus"] = "Registration Successful";
+            TempData["regStatus"] = "Registratio";
             return RedirectToAction("ShowProduct");
         }
     }

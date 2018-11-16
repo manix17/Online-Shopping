@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Online_Shopping.Models;
 
+// Fetch + Merge = pull
+
 namespace Online_Shopping.Controllers
 {
     public class ProductController : Controller

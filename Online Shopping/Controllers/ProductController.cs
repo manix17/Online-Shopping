@@ -111,7 +111,15 @@ namespace Online_Shopping.Controllers
                 TempData["editStatus"] = "Successful";
 
             }
-            return RedirectToAction("ShowProduct");
+            if(TempData["dtlpage"] == null)
+            {
+                return RedirectToAction("ShowProduct");
+            }
+            else
+            {
+                int lid = id;
+                return RedirectToAction("Details", "Product", new { id = lid  });
+            }
         }
 
         public ActionResult VirtualDelete(int id)
@@ -132,6 +140,7 @@ namespace Online_Shopping.Controllers
         {
             using(ShoppingDBEntities objdtl = new ShoppingDBEntities())
             {
+                TempData["dtlpage"] = "true";
                 var result = objdtl.tblProducts.Where(l => l.ProductID == id).SingleOrDefault();
                 return View(result);
             }

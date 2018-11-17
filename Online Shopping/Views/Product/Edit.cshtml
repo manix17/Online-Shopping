@@ -1,4 +1,5 @@
-﻿@model Online_Shopping.Models.EditProducts
+﻿@using Online_Shopping.Models
+@model EditProducts
 
 @{
     ViewBag.Title = "Edit Details";
@@ -7,10 +8,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>EditProducts</h4>
         <hr />
@@ -18,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.productName, disabled = "true" })
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @placeholder = ViewBag.productName } })
                 @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ProductDesc, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.productDesc })
+                @Html.TextAreaFor(model => model.ProductDesc, new { htmlAttributes = new { @class = "form-control" }, @placeholder = ViewBag.productDesc, @rows = "8", @cols = "100" })
                 @Html.ValidationMessageFor(model => model.ProductDesc, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductUnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ProductUnitPrice, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.productUnitPrice })
+                @Html.EditorFor(model => model.ProductUnitPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = ViewBag.productUnitPrice } })
                 @Html.ValidationMessageFor(model => model.ProductUnitPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductUnit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ProductUnit, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.productUnit })
+                @Html.EditorFor(model => model.ProductUnit, new { htmlAttributes = new { @class = "form-control", @placeholder = ViewBag.productUnit } })
                 @Html.ValidationMessageFor(model => model.ProductUnit, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,7 +51,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" }, @Value = ViewBag.productCategory, disabled = "true" })
+                @*@Html.DropDownListFor(m => m.CategoryId, new SelectList(Enum.GetValues(typeof(Category))), "Select Category", htmlAttributes: new { @class = "form-control", @disabled = true })*@
+                @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control", @placeholder = ViewBag.productCategory, @disabled = true } })
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
         </div>

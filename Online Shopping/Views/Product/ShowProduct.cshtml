@@ -8,7 +8,16 @@
     else
     {
         ViewBag.Title = "Product Successfully Added - Our Products List";
-        ViewBag.regSuccess = "Product Successfully Added";
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Product Successfully Added</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+            </div><!-- /.box -->
+        </div>
     }
 }
 @{if (TempData["editStatus"] == null)
@@ -18,8 +27,18 @@
 
     else
     {
+
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Product Edited Successfully</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+            </div><!-- /.box -->
+        </div>
         ViewBag.Title = "Successfully Edited - Our Products List";
-        ViewBag.editSuccess = "Your Edit Was Successfull";
     }
 }
 
@@ -30,19 +49,30 @@
 
     else
     {
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Successfully Deleted</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+            </div><!-- /.box -->
+        </div>
         ViewBag.Title = "Successfully Deleted - Our Products List";
-        ViewBag.delSuccess = "Successfully Deleted";
     }
 }
 
-<h1>@ViewBag.regSuccess</h1>
-<h1>@ViewBag.editSuccess</h1>
-<h1>@ViewBag.delSuccess</h1>
+
+
 
 <h2>ShowProduct</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateProduct")
+    @Html.ActionLink("Create New Product", "CreateProduct")
+</p>
+<p>
+    @Html.ActionLink("Create New Category", "CreateCategory", "Category")
 </p>
 <table class="table">
     <tr>
@@ -50,7 +80,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.UnitPrice)
         </th>
@@ -70,7 +100,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>

@@ -16,7 +16,15 @@ namespace Online_Shopping.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         [HttpPost]

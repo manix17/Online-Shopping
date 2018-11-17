@@ -150,6 +150,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\EditProducts.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -1190,6 +1192,7 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Shared\_LayoutMaster.cshtml" />
+    <Content Include="Views\Category\CreateCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

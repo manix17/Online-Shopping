@@ -1,4 +1,5 @@
-﻿@model Online_Shopping.Models.ProductModel
+﻿@using Online_Shopping.Models
+@model ProductModel
 
 @{
     ViewBag.Title = "CreateProduct";
@@ -7,10 +8,10 @@
 <h2>CreateProduct</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>ProductModel</h4>
         <hr />
@@ -26,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ProductDesc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.ProductDesc, new { htmlAttributes = new { @class = "form-control" }, @rows = "8", @cols = "100" })
                 @Html.ValidationMessageFor(model => model.ProductDesc, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(Enum.GetValues(typeof(Category))), "Select Category", htmlAttributes:  new{ @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
         </div>

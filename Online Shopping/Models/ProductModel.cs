@@ -24,8 +24,16 @@ namespace Online_Shopping.Models
         [Display(Name = "Unit")]
         public string ProductUnit { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Category Name")]
+        [Required(ErrorMessage = "Please Select a Category")]
         [Display(Name = "Category")]
-        public string CategoryId { get; set; }
+        //public string CategoryId { get; set; }
+        public Category CategoryId { get; set; }
+    }
+    public enum Category
+    {
+        Electronics,
+        Games,
+        Sports,
+        Footwear
     }
 }

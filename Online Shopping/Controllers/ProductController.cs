@@ -35,12 +35,13 @@ namespace Online_Shopping.Controllers
                 try
                 {
                     tblProduct objTblprod = new tblProduct();
+                    Category objcat = new Category();
 
                     objTblprod.ProductName = obj.ProductName;
                     objTblprod.Description = obj.ProductDesc;
                     objTblprod.UnitPrice = Convert.ToInt32(obj.ProductUnitPrice);
                     objTblprod.Unit = obj.ProductUnit;
-                    objTblprod.Category = obj.CategoryId;
+                    objTblprod.Category = obj.CategoryId.ToString();
                     objTblprod.isActive = true;
 
                     objDBshopping.tblProducts.Add(objTblprod);

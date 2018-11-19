@@ -38,4 +38,12 @@ namespace Online_Shopping
         [Display(Name = "Modified Date")]
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
+
+    public partial class tblProduct
+    {
+        public tblProduct()
+        {
+            this.CreatedDate = DateTime.Now;
+        }
+    }
 }

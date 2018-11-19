@@ -113,7 +113,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "VirtualDelete", new { id = item.ProductID })
+                @Html.ActionLink("Delete", "VirtualDelete", new { id = item.ProductID }, new { onclick = "return confirm('Are you sure you wish to delete this Item?');" })
             </td>
         </tr>
     }

@@ -71,7 +71,6 @@ namespace Online_Shopping.Controllers
             }
         }
 
-
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -134,6 +133,7 @@ namespace Online_Shopping.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult VirtualDelete(int id)
         {
             using (ShoppingDBEntities vdelobj = new ShoppingDBEntities())
@@ -148,6 +148,7 @@ namespace Online_Shopping.Controllers
             return RedirectToAction("ShowProduct");
         }
 
+        [HttpGet]
         public ActionResult Details(int id)
         {
             using(ShoppingDBEntities objdtl = new ShoppingDBEntities())

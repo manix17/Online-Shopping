@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Online_Shopping.Models;
+using Online_Shopping_DAL;
 
 // Fetch + Merge = pull
 
@@ -16,34 +18,30 @@ namespace Online_Shopping.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
-            try
-            {
-                return View();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return View();
             
+        
         }
 
         [HttpPost]
         public ActionResult CreateProduct(ProductModel obj)
         {
+            //ProductDB.Insert(obj);
+
             using (ShoppingDBEntities objDBshopping = new ShoppingDBEntities())
             {
                 try
                 {
                     tblProduct objTblprod = new tblProduct
                     {
-                        //Category objcat = new Category();
 
                         ProductName = obj.ProductName,
                         Description = obj.ProductDesc,
                         UnitPrice = Convert.ToInt32(obj.ProductUnitPrice),
                         Unit = obj.ProductUnit,
                         Category = obj.CategoryId.ToString(),
-                        isActive = true
+                        isActive = true,
+                        CreatedDate = DateTime.Now
                     };
 
                     objDBshopping.tblProducts.Add(objTblprod);
@@ -53,9 +51,9 @@ namespace Online_Shopping.Controllers
                 {
                     throw;
                 }
-
-
             }
+
+
             TempData["regStatus"] = "Registration";
 
             return RedirectToAction("ShowProduct");

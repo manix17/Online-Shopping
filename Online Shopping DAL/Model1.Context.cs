@@ -26,6 +26,7 @@ namespace Online_Shopping_DAL
         }
     
         public virtual DbSet<tblProduct> tblProducts { get; set; }
+        public virtual DbSet<tblProfile> tblProfiles { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
     }
 }

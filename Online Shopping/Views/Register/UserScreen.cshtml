@@ -1,0 +1,67 @@
+﻿@model Online_Shopping_DAL.tblUser
+
+@{if (TempData["Status"].ToString() == "login")
+    {
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Login Successfull</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+            </div><!-- /.box -->
+        </div>
+        ViewBag.Title = "Login Successfull";
+    }
+
+    else if (TempData["Status"].ToString() == "register")
+    {
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Registration Successfull</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+            </div><!-- /.box -->
+        </div>
+        ViewBag.Title = "Registration Successfull";
+
+    }
+    else
+    {
+        ViewBag.Title = "You should not see this page";
+    }
+}
+
+
+<h2>UserScreen</h2>
+
+<div>
+    <h4>LoginModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

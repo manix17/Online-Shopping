@@ -41,13 +41,8 @@
 <body class="layout-boxed">
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
-            
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
-        </a>
+        @Html.ActionLink("HomePage", "Index", "Home",new {id = 1 }, new { @class = "logo" })
+        
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
@@ -326,7 +321,7 @@
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active">@Html.ActionLink("Create Product","CreateProduct")</li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i>@Html.ActionLink("Create Product", "CreateProduct", "Product", new { id = 1 }, new { @class = "fa fa-circle-o" })</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                     </ul>
                 </li>

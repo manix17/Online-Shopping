@@ -12,13 +12,9 @@ namespace Online_Shopping_DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class tblUser
+    public partial class tblProfile
     {
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public Nullable<System.DateTime> RegistrationDate { get; set; }
-        public string Name { get; set; }
         public int profileId { get; set; }
+        public string profileName { get; set; }
     }
 }

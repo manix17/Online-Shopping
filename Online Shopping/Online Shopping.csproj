@@ -157,9 +157,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\DemoDropDownListController.cs" />
+    <Compile Include="Controllers\DemoJQueryFormController.cs" />
+    <Compile Include="Controllers\DemoJQueryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\DemoDropDownListModel.cs" />
     <Compile Include="Models\EditProducts.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -173,7 +177,10 @@
     </Compile>
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CreateProductVM.cs" />
+    <Compile Include="ViewModel\FormDefaultValuesVM.cs" />
     <Compile Include="ViewModel\RegisterVM.cs" />
+    <Compile Include="ViewModel\StatesViewmodel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bootstrap\css\bootstrap.css" />
@@ -1172,9 +1179,15 @@
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Register\UserScreen.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Product\ShowProductsGrid.cshtml" />
+    <Content Include="Views\DemoDropDownList\Index.cshtml" />
+    <Content Include="Views\DemoJQuery\JqueryTest.cshtml" />
+    <Content Include="Views\DemoJQuery\JqueryDropdown.cshtml" />
+    <Content Include="Views\DemoJQueryForm\JqueryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DemoJ\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

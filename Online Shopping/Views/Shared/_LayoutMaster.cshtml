@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@RenderSection("title", required: false)</title>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -321,7 +324,7 @@
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i>@Html.ActionLink("Create Product", "CreateProduct", "Product", new { id = 1 }, new { @class = "fa fa-circle-o" })</a></li>
+                        <li><a href="#">@Html.ActionLink("Create Product", "CreateProduct", "Product", new { id = 1 }, new { @class = "fa fa-circle-o" })</a></li>
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                     </ul>
                 </li>
@@ -624,12 +627,14 @@
             </div><!-- /.tab-pane -->
         </div>
     </aside><!-- /.control-sidebar -->
+
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
+
     <!-- jQuery 2.1.4 -->
     @*<script src="~/plugins/jQuery/jQuery-2.1.4.min.js"></script>*@
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
 
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

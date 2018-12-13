@@ -5,6 +5,43 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ShoppingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCities">
+          <Key>
+            <PropertyRef Name="cityId" />
+          </Key>
+          <Property Name="cityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDemoJQueryForm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="City" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLanguageInter">
+          <Key>
+            <PropertyRef Name="tblId" />
+          </Key>
+          <Property Name="tblId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="languageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLanguages">
+          <Key>
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="languageId" Type="int" Nullable="false" />
+          <Property Name="languageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblProduct">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -26,6 +63,13 @@
           <Property Name="profileId" Type="int" Nullable="false" />
           <Property Name="profileName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblStates">
+          <Key>
+            <PropertyRef Name="stateid" />
+          </Key>
+          <Property Name="stateid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="UserID" />
@@ -38,8 +82,13 @@
           <Property Name="profileId" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ShoppingDBModelStoreContainer">
+          <EntitySet Name="tblCities" EntityType="Self.tblCities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDemoJQueryForm" EntityType="Self.tblDemoJQueryForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLanguageInter" EntityType="Self.tblLanguageInter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLanguages" EntityType="Self.tblLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProfile" EntityType="Self.tblProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStates" EntityType="Self.tblStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -50,6 +99,11 @@
           <EntitySet Name="tblProducts" EntityType="ShoppingDBModel.tblProduct" />
           <EntitySet Name="tblProfiles" EntityType="ShoppingDBModel.tblProfile" />
           <EntitySet Name="tblUsers" EntityType="ShoppingDBModel.tblUser" />
+          <EntitySet Name="tblCities" EntityType="ShoppingDBModel.tblCity" />
+          <EntitySet Name="tblDemoJQueryForms" EntityType="ShoppingDBModel.tblDemoJQueryForm" />
+          <EntitySet Name="tblLanguageInters" EntityType="ShoppingDBModel.tblLanguageInter" />
+          <EntitySet Name="tblLanguages" EntityType="ShoppingDBModel.tblLanguage" />
+          <EntitySet Name="tblStates" EntityType="ShoppingDBModel.tblState" />
         </EntityContainer>
         <EntityType Name="tblProduct">
           <Key>
@@ -82,6 +136,50 @@
           <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="profileId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCity">
+          <Key>
+            <PropertyRef Name="cityId" />
+          </Key>
+          <Property Name="cityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stateId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDemoJQueryForm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblLanguageInter">
+          <Key>
+            <PropertyRef Name="tblId" />
+          </Key>
+          <Property Name="tblId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLanguage">
+          <Key>
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="languageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="stateid" />
+          </Key>
+          <Property Name="stateid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -121,6 +219,55 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCities">
+            <EntityTypeMapping TypeName="ShoppingDBModel.tblCity">
+              <MappingFragment StoreEntitySet="tblCities">
+                <ScalarProperty Name="stateId" ColumnName="stateId" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="cityId" ColumnName="cityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDemoJQueryForms">
+            <EntityTypeMapping TypeName="ShoppingDBModel.tblDemoJQueryForm">
+              <MappingFragment StoreEntitySet="tblDemoJQueryForm">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLanguageInters">
+            <EntityTypeMapping TypeName="ShoppingDBModel.tblLanguageInter">
+              <MappingFragment StoreEntitySet="tblLanguageInter">
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tblId" ColumnName="tblId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLanguages">
+            <EntityTypeMapping TypeName="ShoppingDBModel.tblLanguage">
+              <MappingFragment StoreEntitySet="tblLanguages">
+                <ScalarProperty Name="languageName" ColumnName="languageName" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStates">
+            <EntityTypeMapping TypeName="ShoppingDBModel.tblState">
+              <MappingFragment StoreEntitySet="tblStates">
+                <ScalarProperty Name="stateName" ColumnName="stateName" />
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

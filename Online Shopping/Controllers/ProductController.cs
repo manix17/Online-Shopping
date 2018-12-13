@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Online_Shopping.Models;
 using Online_Shopping_DAL;
+using Online_Shopping.ViewModel;
 
 // Fetch + Merge = pull
 
@@ -14,13 +15,23 @@ namespace Online_Shopping.Controllers
 {
     public class ProductController : Controller
     {
-       
+
         [HttpGet]
         public ActionResult CreateProduct()
         {
-            return View();
-            
-        
+
+            using (ShoppingDBEntities dbobj = new ShoppingDBEntities())
+            {
+                var products = dbobj.tblProducts.ToList();
+
+                CreateProductVM objcreateProductVM = new CreateProductVM();
+                objcreateProductVM.product = new tblProduct();
+                objcreateProductVM.products = products;
+                objcreateProductVM.ProductModel = new ProductModel();
+
+                return View(objcreateProductVM);
+            }
+
         }
 
         [HttpPost]
@@ -120,14 +131,14 @@ namespace Online_Shopping.Controllers
                 TempData["editStatus"] = "Successful";
 
             }
-            if(TempData["dtlpage"] == null)
+            if (TempData["dtlpage"] == null)
             {
                 return RedirectToAction("ShowProduct");
             }
             else
             {
                 int lid = id;
-                return RedirectToAction("Details", "Product", new { id = lid  });
+                return RedirectToAction("Details", "Product", new { id = lid });
             }
         }
 
@@ -149,13 +160,15 @@ namespace Online_Shopping.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            using(ShoppingDBEntities objdtl = new ShoppingDBEntities())
+            using (ShoppingDBEntities objdtl = new ShoppingDBEntities())
             {
                 TempData["dtlpage"] = "true";
                 var result = objdtl.tblProducts.Where(l => l.ProductID == id).SingleOrDefault();
                 return View(result);
             }
-                
+
         }
+
+
     }
 }

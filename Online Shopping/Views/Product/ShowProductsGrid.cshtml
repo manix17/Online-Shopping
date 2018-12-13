@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Online_Shopping_DAL.tblProduct>
+
+@{
+    ViewBag.Title = "ShowProductsGrid";
+}
+
+@{ 
+    WebGrid obj = new WebGrid(source : Model, defaultSort : "", rowsPerPage : 3);
+}
+
+<h2>ShowProductsGrid</h2>
+
+<div>
+    @obj.GetHtml();
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

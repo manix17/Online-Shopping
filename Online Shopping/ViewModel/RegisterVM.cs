@@ -5,6 +5,7 @@ using System.Web;
 using Online_Shopping_DAL;
 using System.Web.Mvc;
 using Online_Shopping.Models;
+using System.ComponentModel.DataAnnotations; 
 
 namespace Online_Shopping.ViewModel
 {

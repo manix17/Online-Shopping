@@ -28,5 +28,10 @@ namespace Online_Shopping_DAL
         public virtual DbSet<tblProduct> tblProducts { get; set; }
         public virtual DbSet<tblProfile> tblProfiles { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblCity> tblCities { get; set; }
+        public virtual DbSet<tblDemoJQueryForm> tblDemoJQueryForms { get; set; }
+        public virtual DbSet<tblLanguageInter> tblLanguageInters { get; set; }
+        public virtual DbSet<tblLanguage> tblLanguages { get; set; }
+        public virtual DbSet<tblState> tblStates { get; set; }
     }
 }

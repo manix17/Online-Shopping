@@ -177,6 +177,7 @@
     </Compile>
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ConvertGenderIDtoString.cs" />
     <Compile Include="ViewModel\CreateProductVM.cs" />
     <Compile Include="ViewModel\FormDbDataVM.cs" />
     <Compile Include="ViewModel\FormDefaultValuesVM.cs" />

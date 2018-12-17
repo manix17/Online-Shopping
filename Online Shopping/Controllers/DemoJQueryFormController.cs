@@ -86,12 +86,6 @@ namespace Online_Shopping.Controllers
         {
             using(ShoppingDBEntities dbObj = new ShoppingDBEntities())
             {
-                JqueryTableDisplay tableDisplay = new JqueryTableDisplay
-                {
-                    Languages = new List<string>()
-                };
-                List<JqueryTableDisplay> jqueryTable = new List<JqueryTableDisplay>();
-
 
                 var q = from tblMaster in dbObj.tblDemoJQueryForms
                         join tblInter in dbObj.tblLanguageInters on tblMaster.id equals tblInter.Id
@@ -100,60 +94,44 @@ namespace Online_Shopping.Controllers
                         join cities in dbObj.tblCities on tblMaster.City equals cities.cityId
                         where (tblMaster.id == tblInter.Id) && (tblInter.languageId == tblLang.languageId)
                             && (tblMaster.State == states.stateid) && (tblMaster.City == cities.cityId)
-                        select new {tblMaster.id, tblMaster.Name, tblMaster.DOB, tblMaster.Gender, states.stateid, states.stateName,
+                        select new {tblMaster.Code ,tblMaster.id, tblMaster.Name, tblMaster.DOB, tblMaster.Gender, states.stateid, states.stateName,
                                     tblMaster.Salary, cities.cityId, cities.cityName, tblLang.languageId, tblLang.languageName};
                 var results = q.ToList();
 
-                int i = -1;
-                int j = 0;
-                Nullable<int> last_id = null;
+                List<JqueryTableDisplay> jqueryTable = new List<JqueryTableDisplay>();
 
                 foreach (var item in results)
                 {
-
-                    if (item.id != last_id)
+                    if (!jqueryTable.Any(c => c.id == item.id))
                     {
-                        jqueryTable.Add(tableDisplay);
-                        i++;
-                        jqueryTable[i].Name = item.Name;
-                        jqueryTable[i].DOB = item.DOB;
-                        jqueryTable[i].Salary = item.Salary;
+                        JqueryTableDisplay tableData = new JqueryTableDisplay();
+                        tableData.Code = item.Code;
+                        tableData.id = item.id;
+                        tableData.State = item.stateName;
+                        tableData.City = item.cityName;
+                        tableData.Name = item.Name;
+                        tableData.DOB = item.DOB;
+                        tableData.Salary = item.Salary;
+                        tableData.Gender = ConvertGenderIDtoString.Convert(item.Gender);
 
-                        if(item.Gender== 1)
-                        {
-                            jqueryTable[i].Gender = "Male";
-                        }
-                        else if (item.Gender == 2)
-                        {
-                            jqueryTable[i].Gender = "Female";
-                        }
-                        else if (item.Gender == 3)
-                        {
-                            jqueryTable[i].Gender = "Transgender";
-                        }
-                        else
-                        {
-                            jqueryTable[i].Gender = "Not Stated";
-                        }
-
-                        jqueryTable[i].State = item.stateName;
-                        jqueryTable[i].City = item.cityName;
-
-                        jqueryTable[i].Languages.Add("test");
-                        jqueryTable[i].Languages[j] = item.languageName;
-                        last_id = item.id;
+                        tableData.Languages = new List<string>();
+                        tableData.Languages.Add(item.languageName);
+                        jqueryTable.Add(tableData);
                     }
                     else
                     {
-                        j++;
-                        jqueryTable[i].Languages.Add("test");
-                        jqueryTable[i].Languages[j] = item.languageName;                  
+                        if (!string.IsNullOrEmpty(item.languageName))
+                        {
+                            var row = jqueryTable.Where(c => c.id == item.id).FirstOrDefault();
+                            if (row != null)
+                            {
+                                row.Languages.Add(item.languageName);
+                            }
+                        }
                     }
                 }
 
-                var output = jqueryTable;
-
-               return Json(output, JsonRequestBehavior.AllowGet);
+               return Json(jqueryTable, JsonRequestBehavior.AllowGet);
             }
             
         }

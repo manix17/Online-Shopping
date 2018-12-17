@@ -7,6 +7,8 @@ namespace Online_Shopping.ViewModel
 {
     public class JqueryTableDisplay
     {
+        public string Code { get; set; }
+        public int id { get; set; }
         public string Name { get; set; }
         public DateTime DOB { get; set; }
         public string Gender { get; set; }

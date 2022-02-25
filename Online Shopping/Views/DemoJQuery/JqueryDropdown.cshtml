@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "JqueryDropdown";
+}
+
+<h2>JqueryDropdown</h2>
+
+<div>
+    <label>State</label>
+    <select id="StateDropDown">
+        <option value="Select">Select</option>
+    </select>
+</div>
+
+
+<div>
+    <label>District</label>
+    <select id="DistrictDropDown">
+        <option value="Select">Select</option>
+    </select>
+</div>
+
+<script>
+    //$("#btnSubmit").click(function () {
+    //    $.ajax({
+    //        url: 'GetStates',
+    //        success: function (data) {
+    //            $.each(data, function (i, item) {
+    //                $("#StateDropDown").append("<option value=" + data[i] + ">" + data[i]+"</option>")
+    //            })
+    //        },
+    //        error: function (data) {
+    //            console.log('Error Fetching Data');
+    //        }
+    //    })
+    //});
+
+    
+    $.ajax({
+        url: 'GetStates',
+        success: function (data) {
+            if (data.length > 0) {
+                //$("#StateDropDown").html('');
+                $.each(data, function (i, item) {
+                    $("#StateDropDown").append("<option value=" + data[i].stateid + ">" + data[i].state + "</option>")
+                })
+            }
+        },
+        error: function (data) {
+            console.log('Error Fetching Data');
+        }
+    });
+    
+
+    $("#StateDropDown").on("change",function () {
+        var state = $("#StateDropDown").val();
+        var obj = { state: state };
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(obj),
+            url: 'GetDistricts',
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    $("#DistrictDropDown").append("<option value=" + i + ">" + data[i] + "</option>")
+                })
+            },
+            error: function (data) {
+                console.log('Error Fetching Data');
+            }
+        })
+    });
+
+
+
+</script>
+

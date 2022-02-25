@@ -17,6 +17,7 @@ namespace Online_Shopping.Models
 
         [Required(ErrorMessage = "Please Enter Unit Price")]
         [Display(Name = "Unit Price")]
+        [RegularExpression("^[0-9]+$",ErrorMessage = "Please Enter Numbers Only")]
         public string ProductUnitPrice { get; set; }
 
 

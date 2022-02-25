@@ -1,8 +1,14 @@
-﻿@using Online_Shopping.Models
-@model ProductModel
+﻿@using Online_Shopping.ViewModel
+@using Online_Shopping.Models
+@model CreateProductVM
+
+@{ 
+
+}
 
 @{
-    ViewBag.Title = "CreateProduct";
+
+    WebGrid obj = new WebGrid(source: Model.products, defaultSort: "", rowsPerPage: 5, columnNames: new[]{"ProductName", "Description", "UnitPrice" });
 }
 
 <h2>CreateProduct</h2>
@@ -17,42 +23,42 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProductModel.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProductModel.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductModel.ProductName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProductModel.ProductDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ProductDesc, new { htmlAttributes = new { @class = "form-control" }, @rows = "8", @cols = "100" })
-                @Html.ValidationMessageFor(model => model.ProductDesc, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.ProductModel.ProductDesc, new { htmlAttributes = new { @class = "form-control" }, @rows = "8", @cols = "100" })
+                @Html.ValidationMessageFor(model => model.ProductModel.ProductDesc, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductUnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProductModel.ProductUnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductUnitPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductUnitPrice, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProductModel.ProductUnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductModel.ProductUnitPrice, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProductModel.ProductUnit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductUnit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductUnit, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProductModel.ProductUnit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductModel.ProductUnit, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProductModel.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.CategoryId, new SelectList(Enum.GetValues(typeof(Category))), "Select Category", htmlAttributes:  new{ @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.ProductModel.CategoryId, new SelectList(Enum.GetValues(typeof(Category))), "Select Category", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductModel.CategoryId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -62,6 +68,8 @@
             </div>
         </div>
     </div>
+
+    @obj.GetHtml()
 }
 
 <div>
@@ -70,4 +78,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section title {
+    Create Product
 }

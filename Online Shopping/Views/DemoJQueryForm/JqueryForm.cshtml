@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewBag.Title = "JqueryForm";
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+
+<h2>JqueryForm</h2>
+<div id="modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">[X]</a>
+            </div>
+            <h3>Edit Details</h3>
+            <div class="modal-body">
+                Name : <input type="text" id="txtxEditName" />
+                <input type="button" value="Save" id="btnbEditForm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class=" row">
+    <div class="form-horizontal col-md-4">
+        <div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Code</label>
+                <input type="text" placeholder="Enter Your Code" class="col-md-4" id="code" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">DOB</label>
+                <input type="date" class="col-md-4" id="dob" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Name</label>
+                <input type="text" placeholder="Enter Your Name" class="col-md-4" id="name" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Gender</label>
+
+                <input type="radio" name="Gender" value="1" /> Male
+                <input type="radio" name="Gender" value="2" /> Female
+                <input type="radio" name="Gender" value="3" /> Transgender
+                <input type="radio" name="Gender" value="4" /> Prefer not to disclose
+
+            </div>
+
+            <div class="form-group" id="languages">
+                <label class="control-label col-md-2">Languages known</label>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Salary</label>
+                <input type="number" id="salary" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">State</label>
+                <select id="state">
+                    <option value="State">---SELECT STATE---</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">City</label>
+                <select id="city">
+                    <option value="Select">---SELECT CITY---</option>
+                </select>
+            </div>
+
+            <div class="control-label col-md-2">
+                <input type="submit" value="Submit" id="btnSubmit" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div style="overflow-x:auto;">
+            <table id="tblDisplay">
+                <thead>
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            DOB
+                        </td>
+                        <td>
+                            Gender
+                        </td>
+                        <td>
+                            Languages Known
+                        </td>
+                        <td>
+                            Salary
+                        </td>
+                        <td>
+                            State
+                        </td>
+                        <td>
+                            City
+                        </td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <script>
+
+        loadDefault();
+        loadCityOnStateSelection();
+        submitValues();
+        GetDbValues();
+
+
+
+        function loadDefault() {
+            $.ajax({
+                url: 'GetDefaultValues',
+                success: function (data) {
+
+                    $.each(data.LanguagesKnown, function (i, item) {
+                        $("#languages").append('<input type="checkbox" name="chkLanguages" value=' + item.languageId + ' />' + item.languageName + '');
+                    })
+
+                    $("#state").html('');
+                    $("#state").append('<option value="State">---SELECT STATE---</option>');
+                    $.each(data.States, function (i, item) {
+                        $("#state").append('<option value=' + item.stateid + '>' + item.stateName + '</option>');
+                    })
+
+                },
+                error: function (data) {
+                    console.log("Error Fetching Data")
+                }
+
+            });
+        }
+
+        function loadCityOnStateSelection() {
+
+
+            $("#state").on("change", function () {
+                var state = $("#state").val();
+                //console.log('state', state);
+
+                var obj = { state: state };
+                //console.log('obj', obj);
+
+                $.ajax({
+                    url: 'GetCityByState',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(obj),
+                    success: function (data) {
+                        //console.log('DAta returned', data);
+
+                        $("#city").html('');
+                        $("#city").append('<option value="City">---SELECT CITY---</option>');
+                        $.each(data, function (i, item) {
+                            $("#city").append('<option value=' + item.cityId + '>' + item.cityName + '</option>');
+                        })
+                    },
+                    error: function (data) {
+                        console.log("Error fetching data from GetCityByState");
+                    }
+                })
+            })
+
+        }
+
+        function submitValues() {
+            $("#btnSubmit").click(function () {
+
+                var code = $("#code").val();
+                var dob = $("#dob").val();
+                var name = $("#name").val();
+                var gender = $("input[name=Gender]:checked").val();
+                var arrLanguages = [];
+
+                $.each($("input[name=chkLanguages]:checked"), function () {
+                    arrLanguages.push($(this).val());
+                });
+
+                var dob = $("#dob").val();
+                var salary = $("#salary").val();
+                var state = $("#state").val();
+                var city = $("#city").val();
+
+                var obj = {
+                    code: code,
+                    name: name,
+                    dob: dob,
+                    gender: gender,
+                    languages: arrLanguages,
+                    salary: salary,
+                    state: state,
+                    city: city
+                };
+
+                $.ajax({
+                    url: 'SaveFormtoDb',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(obj),
+                    success: function (data) {
+                        console.log(data);
+                        alert('Registration Successfull');
+                    },
+                    error: function (data) {
+                        console.log("Data could'nt be saved")
+                    }
+                });
+
+            });
+        }
+
+        function GetDbValues() {
+            $.ajax({
+                url: 'GetDbData',
+                success: function (data) {
+                    ShowDbDataInTable(data);
+                },
+                error: function (data) {
+                    alert("Could'nt retrieve data from database");
+                }
+            });
+        }
+
+        function ShowDbDataInTable(data) {
+            console.log(data);
+            $.each(data, function (i, item) {
+                $("#tblDisplay tbody").append("<tr><td>" + item.Name + "</td><td>" + ToJavaScriptDate(item.DOB)
+                    + "</td> <td>" + item.Gender + "</td><td>" + item.Languages + "</td><td>" + item.Salary
+                    + "</td><td>" + item.State + "</td><td>" + item.City
+                    + "</td><td><a href='#' class='btn btn-warning' onclick='EditDetails(id)'><span class='glyphicon glyphicon-edit'></span></a></td>"
+                    + "<td><a href='#' class='btn btn-danger' onclick='Delete(id)'><span class='glyphicon glyphicon-remove'></span></a></td>");
+                console.log("name", item.Name);
+            });
+        }
+
+        function ToJavaScriptDate(value) {
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getDate() + "-" + (dt.getMonth() + 1) + "-" + dt.getFullYear());
+        }
+
+        function EditDetails(id) {
+            $("#modal").modal("show");
+        }
+
+        function Delete(id) {
+            console.log("success");
+        }
+
+    </script>
+

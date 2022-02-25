@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "JqueryTest";
+}
+
+<h2>JqueryTest</h2>
+
+<h1>This is first Heading</h1>
+<h2>This is Second Heading</h2>
+
+<input type="button" id="btnSubmit" value="Submit" />
+
+<script type="text/javascript">
+
+    console.log('jsEntry');
+
+    $("#btnSubmit").click(function () {
+        alert('HI');
+
+        var RegisterModel = {
+            'Name' : 'TestName'
+        }
+
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            dataType: 'json',
+            data:JSON.stringify(RegisterModel),
+            url: 'JSONResultPost',
+            success: function (data) {
+                console.log('success', data);
+            },
+            error: function (data) {
+                console.log('error', data);
+            }
+        })
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
